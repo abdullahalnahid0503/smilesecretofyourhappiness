@@ -1,0 +1,777 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 52 98% 55%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 52 98% 55%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 88%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --chart-1: 52 98% 55%;
+    --chart-2: 0 0% 0%;
+    --chart-3: 0 0% 60%;
+    --chart-4: 0 0% 80%;
+    --chart-5: 0 0% 40%;
+    --radius: 1.5rem;
+
+    --font-heading:
+      "Inter Tight", "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+
+    --font-body: "Inter", "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+
+    --font-display:
+      "Inter Tight", "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+
+    --font-mono:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .dark {
+    --background: 240 6% 8%;
+    --foreground: 60 8% 96%;
+    --card: 240 6% 11%;
+    --card-foreground: 60 8% 96%;
+    --popover: 240 6% 11%;
+    --popover-foreground: 60 8% 96%;
+    --secondary: 240 5% 14%;
+    --secondary-foreground: 60 8% 96%;
+    --muted: 240 5% 14%;
+    --muted-foreground: 60 5% 70%;
+    --border: 240 5% 22%;
+    --input: 60 8% 96%;
+    --ring: 52 98% 55%;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html[lang="bn"] {
+    --font-heading:
+      "Hind Siliguri", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+
+    --font-body: "Hind Siliguri", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    --font-display:
+      "Hind Siliguri", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /*
+    Bengali script cannot tolerate tight letter-spacing or tight line-height.
+    Relax both for Bangla.
+  */
+
+  html[lang="bn"] h1,
+  html[lang="bn"] h2,
+  html[lang="bn"] h3,
+  html[lang="bn"] h4,
+  html[lang="bn"] h5,
+  html[lang="bn"] h6 {
+    letter-spacing: normal;
+    line-height: 1.3;
+  }
+
+  html[lang="bn"] p,
+  html[lang="bn"] li {
+    overflow-wrap: break-word;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+  }
+
+  /*
+    Accessibility focus style.
+    Individual form controls below override this with their own clean focus.
+  */
+
+  :focus-visible {
+    outline: 3px solid #000000;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .smile-stroke {
+    position: relative;
+    display: inline-block;
+  }
+
+  .smile-stroke::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: 0.08em;
+    height: 0.22em;
+    background: #fde01a;
+    transform: skewX(-20deg) rotate(-1.5deg);
+    z-index: -1;
+    border-radius: 2px;
+  }
+
+  .card-hc {
+    @apply bg-white border-2 border-black rounded-3xl transition-all duration-300;
+  }
+
+  .card-hc:hover {
+    box-shadow: 8px 8px 0 0 #fde01a;
+    transform: translate(-2px, -2px);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#FDE01A] text-black font-semibold px-7 py-3.5 border-2 border-[#FDE01A] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:border-black hover:shadow-[0_10px_24px_rgba(0,0,0,0.20)] active:translate-y-0 active:scale-[0.98];
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-black text-white font-semibold px-7 py-3.5 border-2 border-black shadow-[0_4px_14px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FDE01A] hover:text-black hover:border-[#FDE01A] hover:shadow-[0_10px_24px_rgba(0,0,0,0.20)] active:translate-y-0 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-transparent text-black font-semibold px-7 py-3.5 border-2 border-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)] active:translate-y-0 active:scale-[0.98];
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-transparent text-white font-semibold px-7 py-3.5 border-2 border-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-black hover:shadow-[0_10px_24px_rgba(0,0,0,0.28)] active:translate-y-0 active:scale-[0.98];
+  }
+
+  .field-input-boxed {
+    @apply w-full rounded-2xl border-2 border-black/12 bg-white px-4 py-3.5 text-base text-black placeholder:text-black/35 transition-colors focus:border-black focus:outline-none focus:ring-0;
+  }
+
+  .field-input {
+    @apply w-full bg-transparent border-0 border-b-2 border-black/20 rounded-none px-0 py-3 text-base text-black placeholder:text-black/40 focus:border-black focus:outline-none focus:ring-0 transition-colors;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-black;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 3px;
+    background: #fde01a;
+    transform: skewX(-30deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(253, 224, 26, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(253, 224, 26, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(253, 224, 26, 0);
+  }
+}
+
+.btn-pulse {
+  animation: pulse-ring 2.2s cubic-bezier(0.66, 0, 0, 1) infinite;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+@layer utilities {
+  .dark body {
+    background-color: #131316;
+    color: #f4f4f2;
+  }
+
+  /* Custom component classes */
+
+  .dark .card-hc {
+    background-color: #181920;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .dark .btn-dark {
+    background-color: #f4f4f2;
+    color: #000;
+    border-color: #f4f4f2;
+  }
+
+  .dark .btn-dark:hover {
+    background-color: #fde01a;
+    color: #000;
+    border-color: #fde01a;
+  }
+
+  .dark .btn-outline {
+    color: #f4f4f2;
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .dark .btn-outline:hover {
+    background-color: #f4f4f2;
+    color: #000;
+    border-color: #f4f4f2;
+  }
+
+  /*
+    Normal text inputs.
+    IMPORTANT: No yellow focus border here.
+  */
+
+  .dark .field-input {
+    color: #f4f4f2;
+    border-color: rgba(255, 255, 255, 0.18);
+    background-color: transparent;
+  }
+
+  .dark .field-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .dark .field-input:focus {
+    border-color: rgba(255, 255, 255, 0.35);
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .dark .eyebrow {
+    color: #f4f4f2;
+  }
+
+  /* Surface utilities */
+
+  /*
+    Keep bg-white behaviour for the rest of the site.
+    FormField dropdowns are explicitly scoped below so this
+    rule cannot unexpectedly recolor their surfaces.
+  */
+
+  .dark .bg-white {
+    background-color: #131316;
+  }
+
+  .dark .bg-white\/95 {
+    background-color: rgba(19, 19, 22, 0.92);
+  }
+
+  .dark .bg-\[\#F5F5F5\] {
+    background-color: #1b1c22;
+  }
+
+  /* Text */
+
+  .dark .text-black {
+    color: #f4f4f2;
+  }
+
+  .dark .text-black\/80 {
+    color: rgba(244, 244, 242, 0.82);
+  }
+
+  .dark .text-black\/75 {
+    color: rgba(244, 244, 242, 0.78);
+  }
+
+  .dark .text-black\/70 {
+    color: rgba(244, 244, 242, 0.72);
+  }
+
+  .dark .text-black\/65 {
+    color: rgba(244, 244, 242, 0.66);
+  }
+
+  .dark .text-black\/60 {
+    color: rgba(244, 244, 242, 0.6);
+  }
+
+  .dark .text-black\/55 {
+    color: rgba(244, 244, 242, 0.54);
+  }
+
+  .dark .text-black\/50 {
+    color: rgba(244, 244, 242, 0.5);
+  }
+
+  .dark .text-black\/40 {
+    color: rgba(244, 244, 242, 0.42);
+  }
+
+  .dark .text-black\/15 {
+    color: rgba(244, 244, 242, 0.2);
+  }
+
+  /* Borders */
+
+  .dark .border-black {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .dark .border-black\/10 {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .dark .border-black\/12 {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .dark .border-black\/30 {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  /* Hover surfaces */
+
+  .dark .hover\:bg-black\/5:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .dark .hover\:bg-black\/10:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Yellow accents */
+
+  .dark .bg-\[\#FDE01A\] {
+    color: #000;
+  }
+
+  .dark .hover\:bg-\[\#FDE01A\]:hover {
+    color: #000;
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black,
+  .dark .bg-\[\#FDE01A\] .text-black {
+    color: #000;
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black\/80 {
+    color: rgba(0, 0, 0, 0.82);
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black\/75 {
+    color: rgba(0, 0, 0, 0.78);
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black\/70 {
+    color: rgba(0, 0, 0, 0.72);
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black\/65 {
+    color: rgba(0, 0, 0, 0.66);
+  }
+
+  .dark .bg-\[\#FDE01A\] .text-black\/60 {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .dark .bg-\[\#FDE01A\] .eyebrow {
+    color: #000;
+  }
+
+  /*
+    IMPORTANT:
+    Do NOT add a generic
+    .dark .bg-[#FDE01A] .text-black:hover { color: #fff; }
+    rule here.
+
+    That rule was causing text inside yellow sections,
+    especially "What We Believe", to turn white on hover.
+  */
+
+  .dark .btn-primary:hover {
+    color: #fff;
+  }
+
+  /* Boxed inputs */
+
+  .dark .field-input-boxed {
+    @apply border-white/15 bg-white/5 text-[#f4f4f2] placeholder:text-white/35;
+  }
+
+  .dark .field-input-boxed:focus {
+    @apply border-white/25;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /*
+    IMPORTANT:
+    Do NOT globally make every focused element yellow.
+    This was causing unwanted yellow boxes around form controls.
+  */
+
+  .dark :focus-visible {
+    outline-color: rgba(255, 255, 255, 0.35);
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ============================================================
+   CUSTOM FORM DROPDOWN
+   ============================================================ */
+
+@layer components {
+  .form-dropdown {
+    position: relative;
+    width: 100%;
+  }
+
+  .form-dropdown-trigger {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: transparent;
+    color: #000000;
+    padding: 0.75rem 0;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease;
+  }
+
+  .form-dropdown-trigger:hover {
+    border-bottom-color: rgba(0, 0, 0, 0.45);
+  }
+
+  .form-dropdown-trigger:focus,
+  .form-dropdown-trigger:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .form-dropdown-trigger[data-open="true"] {
+    border-bottom-color: #fde01a;
+  }
+
+  /*
+    Dropdown menu
+    - Yellow shadow in BOTH light and dark mode
+    - Maximum height prevents Department from reaching footer
+    - Scrolls internally when there are many options
+  */
+
+  .form-dropdown-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 100;
+    max-height: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 14px;
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 6px 6px 0 0 #fde01a;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+
+  .form-dropdown-option {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: #ffffff;
+    color: #000000;
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .form-dropdown-option:hover {
+    background: #f5f5f5;
+    color: #000000;
+  }
+
+  .form-dropdown-option[data-selected="true"] {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .form-dropdown-option:focus,
+  .form-dropdown-option:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .form-dropdown-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  /* ==========================================================
+     DARK MODE
+     ========================================================== */
+
+  .dark .form-dropdown-trigger {
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+    background: transparent !important;
+    color: #f4f4f2 !important;
+  }
+
+  .dark .form-dropdown-trigger:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .dark .form-dropdown-trigger[data-open="true"] {
+    border-bottom-color: #fde01a;
+  }
+
+  .dark .form-dropdown-menu {
+    max-height: 240px;
+    border-color: rgba(255, 255, 255, 0.14);
+    background: #181920 !important;
+    color: #f4f4f2 !important;
+
+    /*
+      SAME YELLOW SHADOW AS LIGHT MODE
+    */
+
+    box-shadow: 6px 6px 0 0 #fde01a;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .dark .form-dropdown-option {
+    background: #181920 !important;
+    color: #f4f4f2 !important;
+  }
+
+  .dark .form-dropdown-option:hover {
+    background: #24252d !important;
+    color: #ffffff !important;
+  }
+
+  .dark .form-dropdown-option[data-selected="true"] {
+    background: #f4f4f2 !important;
+    color: #000000 !important;
+  }
+
+  .dark .form-dropdown-option:focus,
+  .dark .form-dropdown-option:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ==========================================================
+     SCROLLBAR
+     ========================================================== */
+
+  .form-dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .form-dropdown-menu::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .form-dropdown-menu::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 999px;
+  }
+
+  .form-dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .dark .form-dropdown-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .dark .form-dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.45);
+  }
+}
+
+/* ============================================================
+   LANGUAGE TOGGLE
+   ============================================================ */
+
+@layer components {
+  .language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    height: 44px;
+    padding: 4px;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .language-toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 9999px;
+    background-color: transparent;
+    color: #000000;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background-color 300ms ease,
+      color 300ms ease,
+      box-shadow 300ms ease,
+      transform 150ms ease;
+  }
+
+  .language-toggle-button:hover {
+    background-color: #fde01a;
+    color: #000000;
+  }
+
+  .language-toggle-button:active {
+    transform: scale(0.96);
+  }
+
+  .language-toggle-button:focus-visible {
+    outline: 3px solid #fde01a !important;
+    outline-offset: 2px;
+  }
+
+  .language-toggle-button-active {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
+  }
+
+  .language-toggle-button-active:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .dark .language-toggle {
+    border-color: #ffffff;
+    background-color: #111111;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  .dark .language-toggle-button {
+    background-color: transparent;
+    color: #ffffff;
+  }
+
+  .dark .language-toggle-button:hover {
+    background-color: #fde01a;
+    color: #000000;
+  }
+
+  .dark .language-toggle-button-active {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 1px 6px rgba(255, 255, 255, 0.18);
+  }
+
+  .dark .language-toggle-button-active:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+/* ============================================================
+   ABOUT PAGE — TEXT HOVER FIX
+   ============================================================ */
+
+/*
+  Prevent normal text on the About page from changing color
+  when the mouse moves over it.
+
+  Buttons and links are intentionally excluded so their
+  existing hover behavior remains unchanged.
+*/
+
+.about-page :is(h1, h2, h3, h4, h5, h6, p, span):hover {
+  color: inherit !important;
+}
+
+/*
+  WHAT WE BELIEVE
+  Yellow section must always use black text,
+  including on hover and in dark mode.
+*/
+
+.about-believe,
+.about-believe h1,
+.about-believe h2,
+.about-believe h3,
+.about-believe p,
+.about-believe span {
+  color: #000 !important;
+}
+
+.about-believe h1:hover,
+.about-believe h2:hover,
+.about-believe h3:hover,
+.about-believe p:hover,
+.about-believe span:hover {
+  color: #000 !important;
+}
