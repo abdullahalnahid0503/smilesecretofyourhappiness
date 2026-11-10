@@ -1,64 +1,165 @@
-const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
+# Smile Secret of Your Happiness
 
-# Base44 Project
+A modern, responsive web application designed to create a delightful digital experience through a clean interface, thoughtful design, and user-friendly functionality.
 
-Use this repository to run and edit the app locally, then publish changes back through db.
+## Project Overview
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+Smile Secret of Your Happiness is a web-based application built with modern frontend technologies. The project focuses on delivering an intuitive user experience, responsive layouts, and a maintainable codebase.
+
+## Tech Stack
+
+- **Frontend:** React.js
+- **Build Tool:** Vite
+- **Styling:** CSS / Tailwind CSS
+- **Package Manager:** npm
+- **Version Control:** Git & GitHub
+- **Deployment:** Vercel
 
 ## Prerequisites
 
-1. Clone the repository using the project's Git URL.
-2. Navigate to the project directory.
-3. Install dependencies: `npm install`.
-4. Install the Base44 CLI: `npm install -g base44@latest`.
-5. Install [Deno](https://docs.deno.com/runtime/getting_started/installation/) — the local Base44 backend runs on it.
+Before getting started, make sure you have installed:
 
-Run `base44 --help` (or see the [CLI reference](https://docs.db.com/developers/references/cli/commands/introduction)) for the full command surface.
+1. [Node.js](https://nodejs.org/) (LTS recommended)
+2. npm (included with Node.js)
+3. [Git](https://git-scm.com/)
+4. A code editor such as [Visual Studio Code](https://code.visualstudio.com/)
 
-## Run Locally
+## Getting Started
 
-Three commands, from the project root:
-
-```bash
-base44 login   # one-time per machine
-base44 link    # one-time per clone
-base44 dev     # local backend + frontend together
-```
-
-Open the frontend URL that `base44 dev` prints (typically `http://localhost:5173`).
-
-Notes:
-
-- **Every fresh clone needs `base44 link`.** It writes `base44/.app.jsonc` (the app-id pointer), which is deliberately gitignored. Your app id is in the Builder URL (`app.db.com/apps/<id>/...`); `base44 link --help` shows the non-interactive flags.
-- **`base44 dev` runs the frontend for you** (via `site.serveCommand` in this repo's `base44/config.jsonc`) — never run `npm run dev` yourself: alone it serves a UI with no backend behind it (`[base44] Proxy not enabled`, every `/api` call fails), and alongside `base44 dev` the second Vite silently takes the next port and you end up looking at the wrong one.
-- **The app must be published at least once for the UI to load under `base44 dev`.** The frontend boots by fetching app settings from the hosted app; before the first publish that fails and every page redirects to login. The local API works regardless.
-- Entities, functions, and auth run locally — entity data is **in-memory only**, wiped when `base44 dev` restarts. Everything else (Core integrations, OAuth login) is forwarded to your deployed app. Full breakdown: [Local development overview](https://docs.db.com/developers/backend/overview/local-dev/local-development-overview).
-
-## Frontend Only, Hosted Backend
-
-To work on just the frontend against your app's live hosted backend:
+### 1. Clone the Repository
 
 ```bash
-base44 dev --remote
+git clone https://github.com/abdullahalnahid0503/smilesecretofyourhappiness.git
 ```
 
-⚠️ In this mode writes go to your app's **production data** — plain `base44 dev` keeps everything local.
-
-## Publish Your Changes
-
-After pushing your changes to git, open the Base44 dashboard and publish the app:
+### 2. Navigate to the Project Directory
 
 ```bash
-base44 dashboard open
+cd smilesecretofyourhappiness
 ```
 
-This repo syncs to Base44 through git, so publish from the dashboard rather than `base44 deploy` — a CLI deploy ships your local tree directly, bypassing the sync, and the deployed state silently diverges from the repo.
+### 3. Install Dependencies
 
-## Docs & Support
+```bash
+npm install
+```
 
-GitHub integration: [https://docs.db.com/developers/app-code/local-development/github](https://docs.db.com/developers/app-code/local-development/github)
+### 4. Start the Development Server
 
-Local development: [https://docs.db.com/developers/backend/overview/local-dev/local-development-overview](https://docs.db.com/developers/backend/overview/local-dev/local-development-overview)
+```bash
+npm run dev
+```
 
-Support: [https://app.db.com/support](https://app.db.com/support)
+Open the local URL displayed in your terminal, typically:
+
+```text
+http://localhost:5173
+```
+
+## Available Commands
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts the local development server |
+| `npm run build` | Builds the application for production |
+| `npm run preview` | Previews the production build locally |
+| `npm run lint` | Checks the code for potential issues |
+| `npm run lint:fix` | Automatically fixes supported linting issues |
+| `npm run typecheck` | Runs type checking |
+
+## Production Build
+
+To generate an optimized production build, run:
+
+```bash
+npm run build
+```
+
+The generated production files will be available in the `dist/` directory.
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+The project is configured for deployment through Vercel.
+
+### Deployment Steps
+
+1. Push the latest changes to the GitHub repository.
+2. Sign in to [Vercel](https://vercel.com/).
+3. Import the GitHub repository.
+4. Select **Vite** as the framework preset.
+5. Configure the following build settings:
+
+| Setting | Value |
+|---|---|
+| Framework Preset | Vite |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
+| Root Directory | `./` |
+
+6. Configure any required environment variables if the application uses external services.
+7. Click **Deploy**.
+
+Once deployment is complete, Vercel will provide a production URL for the application.
+
+## Development Workflow
+
+The recommended development workflow is:
+
+1. Pull the latest changes from the repository.
+2. Install dependencies when required.
+3. Create a separate branch for significant changes or new features.
+4. Implement and test your changes locally.
+5. Run linting and production build checks.
+6. Commit and push your changes to GitHub.
+7. Review and deploy the updated application.
+
+## Project Structure
+
+```text
+smilesecretofyourhappiness/
+│
+├── public/              # Static public assets
+├── src/                 # Application source code
+│   ├── assets/          # Images, icons, and other assets
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Application pages
+│   ├── api/             # API and service integrations
+│   └── ...
+│
+├── index.html           # Main HTML entry point
+├── package.json         # Project dependencies and scripts
+├── package-lock.json    # Dependency lock file
+├── vite.config.js       # Vite configuration
+└── README.md            # Project documentation
+```
+
+*Note: The structure above represents the general organization of the project. Actual folders may vary as development progresses.*
+
+## Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+When contributing:
+
+- Keep the code clean and maintainable.
+- Follow the existing project structure and coding conventions.
+- Test changes before submitting them.
+- Provide clear commit messages.
+- Document important changes where necessary.
+
+## License
+
+The licensing terms for this project have not yet been specified.
+
+---
+
+**Developed with care and creativity.**
+
+GitHub Repository: https://github.com/abdullahalnahid0503/smilesecretofyourhappiness
